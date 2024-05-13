@@ -1,8 +1,12 @@
+import NavBar from "@/components/widgets/navbar";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Calculateur d&apos;indice de masse corporelle</h1>
-    </main>
+    <>
+      <header className="w-full background shadow-lg">
+        <NavBar />
+      </header>
+    </>
   );
 }
 
