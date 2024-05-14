@@ -67,6 +67,32 @@
   .background {
     background-color: #f2f6fe;
   }
+
+  @keyframes op {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .contentOpacity {
+    animation: op 1s ease-in-out backwards;
+    animation-delay: 500ms;
+  }
+
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .slideDown {
+    animation: slideDown 500ms ease-in-out backwards;
+    animation-delay: 200ms;
+  }
 }
 
 @layer base {
@@ -77,3 +103,4 @@
     @apply bg-background text-foreground;
   }
 }
+

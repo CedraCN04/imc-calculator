@@ -8,6 +8,7 @@ export const useImc = () => {
   const [textResult, setTextResult] = useState("");
   const [heightError, setHeightError] = useState(false)
   const [weightError, setWeightError] = useState(false)
+  const [imcValide, setImcValide] = useState(false)
 
   const calculateIMC = () => {
     if (heightUser < 100 || heightUser > 250) {
@@ -24,6 +25,9 @@ export const useImc = () => {
       const imc = weightUser / Math.pow(heightUser / 100, 2);
       setResult({imc:imc.toFixed(2), color: getColor(imc)});
       setTextResult(resultIMC(imc));
+      setImcValide(true);
+    } else {
+      setImcValide(false);
     }
   };
 
@@ -71,5 +75,5 @@ export const useImc = () => {
     }
   };
 
-  return { heightUser, weightUser, result, textResult, calculateIMC, userInput, heightError, weightError};
+  return { heightUser, weightUser, result, textResult, calculateIMC, userInput, heightError, weightError, imcValide};
 }

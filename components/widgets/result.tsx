@@ -12,12 +12,14 @@ export default function Result({ result, textResult }: ResultProps) {
       {result && result.imc && result.color && (
         <p
           style={{ backgroundColor: result.color }}
-          className="text-center text-2xl font-bold h-40 w-40 rounded-full flex items-center justify-center mx-auto"
+          className="text-center text-2xl font-bold h-40 w-40 rounded-full flex items-center justify-center mx-auto contentOpacity"
         >
           {result.imc}
         </p>
       )}
-      {textResult && <p className="text-center text-lg mt-10">{textResult}</p>}
+      {textResult && (
+        <p className="text-center text-lg mt-10 contentOpacity">{textResult}</p>
+      )}
     </div>
   );
 }
