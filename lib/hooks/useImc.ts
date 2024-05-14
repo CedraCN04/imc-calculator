@@ -9,6 +9,8 @@ export const useImc = () => {
   const [heightError, setHeightError] = useState(false)
   const [weightError, setWeightError] = useState(false)
   const [imcValide, setImcValide] = useState(false)
+  const [heightInput, setHeightInput] = useState("");
+  const [weightInput, setWeightInput] = useState("");
 
   const calculateIMC = () => {
     if (heightUser < 100 || heightUser > 250) {
@@ -70,10 +72,24 @@ export const useImc = () => {
     let value = e.target.value;
     if (cardId.id === "weight") {
       setWeightUser(Number(value));
+      setWeightInput(value);
     } else {
       setHeightUser(Number(value));
+      setHeightInput(value);
     }
   };
 
-  return { heightUser, weightUser, result, textResult, calculateIMC, userInput, heightError, weightError, imcValide};
+  const reset = () => {
+    setHeightUser(0);
+    setWeightUser(0);
+    setHeightInput("");
+    setWeightInput("");
+    setResult({imc: "", color: ""});
+    setTextResult("");
+    setHeightError(false);
+    setWeightError(false);
+    setImcValide(false);
+  }
+
+  return { heightUser, weightUser, result, textResult, calculateIMC, userInput, heightError, weightError, imcValide, reset, heightInput, weightInput};
 }
