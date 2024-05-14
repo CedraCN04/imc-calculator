@@ -11,14 +11,22 @@ import {
 import { Input } from "@/components/ui/input";
 import { CardInfosUser } from "@/lib/constants";
 import { useImc } from "@/lib/hooks/useImc";
+import Result from "./result";
 
 export default function CardInfos() {
-  const { result, calculateIMC, userInput, heightError, weightError } =
-    useImc();
+  const {
+    calculateIMC,
+    userInput,
+    heightError,
+    weightError,
+    result,
+    textResult,
+  } = useImc();
 
   return (
     <div className="my-40 w-full flex flex-col items-center gap-20">
-      <div className="flex flex-col items-center gap-10 w-full lg:flex-row lg:justify-between xl:w-4/5">
+      <Result result={result} textResult={textResult} />
+      <div className="flex flex-col items-center gap-10 w-f ull lg:flex-row lg:justify-between xl:w-4/5">
         {CardInfosUser.map((card) => (
           <Card className="w-11/12 mx-auto md:w-[450px]" key={card.id}>
             <CardHeader>
@@ -43,11 +51,9 @@ export default function CardInfos() {
           </Card>
         ))}
       </div>
-
       <Button variant="count" className="lg:w-1/6" onClick={calculateIMC}>
         Calculer
       </Button>
-      {result && <p className="text-center">{result}</p>}
     </div>
   );
 }
