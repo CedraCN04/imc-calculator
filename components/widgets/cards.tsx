@@ -13,7 +13,8 @@ import { CardInfosUser } from "@/lib/constants";
 import { useImc } from "@/lib/hooks/useImc";
 
 export default function CardInfos() {
-  const { result, calculateIMC, userInput } = useImc();
+  const { result, calculateIMC, userInput, heightError, weightError } =
+    useImc();
 
   return (
     <div className="my-40 w-full flex flex-col items-center gap-20">
@@ -26,17 +27,23 @@ export default function CardInfos() {
             </CardHeader>
             <CardContent>
               <Input
+                type="number"
                 placeholder={card.placeholder}
                 onChange={(e) => userInput(card, e)}
               />
-              {/* <div className="flex justify-around items-center my-4">
-                <Button variant="count">+</Button>
-                <Button variant="count">-</Button>
-              </div> */}
+              {card.id === "height" && heightError && (
+                <p className="text-red-500 py-6 self-center transition-opacity duration-500 ease-in-out">
+                  {card.error}
+                </p>
+              )}
+              {card.id === "weight" && weightError && (
+                <p className="text-red-500 py-6 self-center">{card.error}</p>
+              )}
             </CardContent>
           </Card>
         ))}
       </div>
+
       <Button variant="count" className="lg:w-1/6" onClick={calculateIMC}>
         Calculer
       </Button>
