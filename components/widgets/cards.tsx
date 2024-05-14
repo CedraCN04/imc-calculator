@@ -17,11 +17,16 @@ export default function CardInfos() {
   const {
     calculateIMC,
     userInput,
+    reset,
     heightError,
     weightError,
     result,
     textResult,
     imcValide,
+    heightUser,
+    weightUser,
+    heightInput,
+    weightInput,
   } = useImc();
 
   return (
@@ -48,6 +53,7 @@ export default function CardInfos() {
                   type="number"
                   placeholder={card.placeholder}
                   onChange={(e) => userInput(card, e)}
+                  value={card.id === "height" ? heightInput : weightInput}
                 />
                 {card.id === "height" && heightError && (
                   <p className="text-red-500 py-6 self-center contentOpacity delay-0">
@@ -63,9 +69,20 @@ export default function CardInfos() {
             </Card>
           ))}
         </div>
-        <Button variant="count" className="lg:w1/6" onClick={calculateIMC}>
-          Calculer
-        </Button>
+        <div className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:justify-between">
+          <Button variant="count" className="lg:w1/6" onClick={calculateIMC}>
+            Calculer
+          </Button>
+          {imcValide && (
+            <Button
+              variant="reset"
+              className="lg:w1/6 contentOpacity"
+              onClick={reset}
+            >
+              Réinitialiser
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
