@@ -25,7 +25,11 @@ export default function CardInfos() {
   } = useImc();
 
   return (
-    <div className="my-40 w-full flex flex-col items-center gap-20">
+    <div className="my-20 w-full flex flex-col items-center gap-20">
+      <h1 className="w-4/5 text-center">
+        Entrez votre taille et votre poids pour connaître votre Indice de Masse
+        Corporelle
+      </h1>
       <Result result={result} textResult={textResult} />
       <div
         className={`flex flex-col items-center gap-10 w-full ${
