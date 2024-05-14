@@ -38,7 +38,7 @@ export default function CardInfos() {
       >
         <div className="flex flex-col items-center gap-10 w-full lg:flex-row lg:justify-between xl:w-4/5">
           {CardInfosUser.map((card) => (
-            <Card className="w-11/12 mx-auto md:w-[450px]" key={card.id}>
+            <Card className="w-10/12 mx-auto md:w-[450px]" key={card.id}>
               <CardHeader>
                 <CardTitle>{card.title}</CardTitle>
                 <CardDescription>{card.description}</CardDescription>

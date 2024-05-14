@@ -7,7 +7,7 @@ export default function Home() {
       <header className="w-full background shadow-lg">
         <NavBar />
       </header>
-      <main className="w-full">
+      <main className="w-11/12 mx-auto">
         <section className="flex flex-col justify-center items-center mx-auto">
           <CardInfos />
         </section>
