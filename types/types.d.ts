@@ -3,4 +3,5 @@ export type CardInfosProps = {
   title: string;
   description: string;
   placeholder: string;
+  error: string;
 };
