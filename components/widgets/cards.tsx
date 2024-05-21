@@ -9,24 +9,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import Result from "@/components/widgets/result";
 import { CardInfosUser } from "@/lib/constants";
 import { useImc } from "@/lib/hooks/useImc";
-import Result from "./result";
 
 export default function CardInfos() {
   const {
     calculateIMC,
     userInput,
     reset,
-    heightError,
-    weightError,
     result,
     textResult,
     imcValide,
-    heightUser,
-    weightUser,
     heightInput,
     weightInput,
+    heightError,
+    weightError,
+    dateInputError,
   } = useImc();
 
   return (
@@ -43,24 +42,37 @@ export default function CardInfos() {
       >
         <div className="flex flex-col items-center gap-10 w-full lg:flex-row lg:justify-between xl:w-4/5">
           {CardInfosUser.map((card) => (
-            <Card className="w-10/12 mx-auto md:w-[450px]" key={card.id}>
+            <Card className="w-10/12 mx-auto md:w-[350px] h-full" key={card.id}>
               <CardHeader>
                 <CardTitle>{card.title}</CardTitle>
                 <CardDescription>{card.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <Input
-                  type="number"
-                  placeholder={card.placeholder}
-                  onChange={(e) => userInput(card, e)}
-                  value={card.id === "height" ? heightInput : weightInput}
-                />
+                {card.type === "number" ? (
+                  <Input
+                    type={card.type}
+                    placeholder={card.placeholder}
+                    onChange={(e) => userInput(card, e)}
+                    value={card.id === "height" ? heightInput : weightInput}
+                  />
+                ) : (
+                  <Input
+                    type={card.type}
+                    placeholder={card.placeholder}
+                    onChange={(e) => userInput(card, e)}
+                  />
+                )}
                 {card.id === "height" && heightError && (
                   <p className="text-red-500 py-6 self-center contentOpacity delay-0">
                     {card.error}
                   </p>
                 )}
                 {card.id === "weight" && weightError && (
+                  <p className="text-red-500 py-6 self-center contentOpacity delay-0">
+                    {card.error}
+                  </p>
+                )}
+                {card.id === "date" && dateInputError && (
                   <p className="text-red-500 py-6 self-center contentOpacity delay-0">
                     {card.error}
                   </p>

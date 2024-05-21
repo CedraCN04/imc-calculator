@@ -1,95 +1,83 @@
+import { errorDateInput, heightInputVerification, imcResult, weightInputVerfification } from "@/lib/functions";
 import { CardInfosProps } from "@/types/types";
 import { useState } from "react";
 
 export const useImc = () => {
-  const [heightUser, setHeightUser] = useState(0);
-  const [weightUser, setWeightUser] = useState(0);
-  const [result, setResult] = useState({imc: "", color: ""})
-  const [textResult, setTextResult] = useState("");
-  const [heightError, setHeightError] = useState(false)
-  const [weightError, setWeightError] = useState(false)
-  const [imcValide, setImcValide] = useState(false)
-  const [heightInput, setHeightInput] = useState("");
-  const [weightInput, setWeightInput] = useState("");
 
+  const [userDetails, setUserDetails] = useState({height:0, weight:0, heightInput:"", weightInput:"", dateInput:"", imcValide:false, result:{imc:"", color:""}, textResult:""})
+
+  const [userError, setUserError] = useState({heightError:false, weightError:false, dateInputError:false})
+
+  let details = {...userDetails}
+  let errors = {...userError}
+
+  const MINHEIGHT = 100
+  const MAXHEIGHT = 250
+  const MAXWEIGHT = 300
+
+  // Vérifications des données entrées par l'utilisateur
+  const inputsVerification = () => {
+    errors.heightError = heightInputVerification(details.height, MINHEIGHT, MAXHEIGHT);
+    errors.weightError = weightInputVerfification(details.weight, MAXWEIGHT);
+    errors.dateInputError = errorDateInput(details.dateInput);
+    setUserError(errors);
+  }
+
+  // Récupération de l'objet imcResult 
+  // Afficher un texte et une couleur précise en fonction de son résultat
+  const imcResultObj = (imc:number) => {
+    const imcResultObj = imcResult(imc);
+    if (imcResultObj !== undefined) {
+      details.result = { imc: imc.toFixed(2), color: imcResultObj.color };
+      details.textResult = imcResultObj.text;
+    }
+  }
+
+  // Calcul de l'imc
   const calculateIMC = () => {
-    if (heightUser < 100 || heightUser > 250) {
-      setHeightError(true)
+    inputsVerification();
+    if (details.height >= MINHEIGHT && details.weight > 0 && !errors.dateInputError) {
+      const imc = details.weight / Math.pow(details.height / 100, 2);
+      imcResultObj(imc);
+      details.imcValide = true;
     } else {
-      setHeightError(false)
+      details.imcValide = false;
     }
-    if (weightUser <= 0 || weightUser > 250) {
-      setWeightError(true)
-    } else {
-      setWeightError(false)
+    setUserDetails(details)
     }
-    if (heightUser >= 100 && weightUser > 0) {
-      const imc = weightUser / Math.pow(heightUser / 100, 2);
-      setResult({imc:imc.toFixed(2), color: getColor(imc)});
-      setTextResult(resultIMC(imc));
-      setImcValide(true);
-    } else {
-      setImcValide(false);
-    }
-  };
-
-  const getColor = (imc: number) => {
-    if (imc < 18.5) {
-      return "#ADD8E6";
-    } else if (imc >= 18.5 && imc < 25) {
-      return "#90EE90";
-    } else if (imc >= 25 && imc < 30) {
-      return "#FFD700";
-    } else if (imc >= 30 && imc < 35) {
-      return "#FFA500";
-    } else if (imc >= 35 && imc < 40) {
-      return "#FF4500";
-    } else {
-      return "#FF0000";
-    }
-  }
-
-  const resultIMC = (imc: number) => {
-    if (imc < 18.5) {
-      return "Vous êtes en insuffisance pondérale";
-    } else if (imc >= 18.5 && imc < 25) {
-      return "Vous avez un poids normal";
-    } else if (imc >= 25 && imc < 30) {
-      return "Vous êtes légèrement en surpoids";
-    } else if (imc >= 30 && imc < 35) {
-      return "Vous êtes en surpoids";
-    } else if (imc >= 35 && imc < 40) {
-      return "Vous êtes en obésité";
-    } else {
-      return "Vous êtes en obésité morbide";
-    }
-  }
-
-  const userInput = (
-    cardId: CardInfosProps,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  
+  // Récupération des données entrées par l'utilisateur
+  const userInput = (cardId: CardInfosProps, e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
     if (cardId.id === "weight") {
-      setWeightUser(Number(value));
-      setWeightInput(value);
+      details.weight = Number(value);
+      details.weightInput = value;
+    } else if (cardId.id === "height") {
+      details.height = Number(value);
+      details.heightInput = value;
     } else {
-      setHeightUser(Number(value));
-      setHeightInput(value);
+      details.dateInput = value;
     }
-  };
-
-  const reset = () => {
-    setHeightUser(0);
-    setWeightUser(0);
-    setHeightInput("");
-    setWeightInput("");
-    setResult({imc: "", color: ""});
-    setTextResult("");
-    setHeightError(false);
-    setWeightError(false);
-    setImcValide(false);
+    setUserDetails(details);
   }
 
-  return { heightUser, weightUser, result, textResult, calculateIMC, userInput, heightError, weightError, imcValide, reset, heightInput, weightInput};
-}
+  const reset = () => {
+    setUserDetails({
+      height: 0,
+      weight: 0,
+      heightInput: "",
+      weightInput: "",
+      imcValide: false,
+      dateInput: "",
+      result: { imc: "", color: "" },
+      textResult: ""
+    })
+    setUserError({
+      heightError: false,
+      weightError: false,
+      dateInputError: false
+    })
+    };
+
+  return { ...userDetails, ...userError, calculateIMC, userInput, reset};
+};
