@@ -1,3 +1,4 @@
+
 export const imcResult = (imc: number) => {
   const imcRanges = [
     { max: 18.5, color: "#ADD8E6", text: "Vous êtes en insuffisance pondérale" },

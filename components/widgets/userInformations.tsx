@@ -11,7 +11,7 @@ import { CardInfosProps } from "@/types/types";
 import Errors from "./errors";
 import UserDateInput from "./userDate";
 
-type UserInformationsProps = {
+export type UserInformationsProps = {
   userInput: (
     cardId: CardInfosProps,
     e: React.ChangeEvent<HTMLInputElement>
