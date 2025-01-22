@@ -1,18 +1,16 @@
-import CardInfos from "@/components/widgets/cards";
-import NavBar from "@/components/widgets/navbar";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <>
-      <header className="w-full background shadow-lg">
-        <NavBar />
-      </header>
-      <main className="w-11/12 mx-auto">
-        <section className="flex flex-col justify-center items-center mx-auto">
-          <CardInfos />
-        </section>
-      </main>
-    </>
+    <section className="flex flex-col items-center justify-center gap-10 min-h-dvh">
+      <h1>Bienvenue sur ce calculateur d&apos;IMC !</h1>
+      <Link
+        href="/calcul"
+        className="bg-blue-300 hover:bg-blue-500 transition-colors duration-500 ease-in-out text-base lg:text-xl text-black hover:text-white py-2 px-4 rounded-lg"
+      >
+        Commencer
+      </Link>
+    </section>
   );
 }
 
