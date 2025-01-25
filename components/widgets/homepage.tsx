@@ -1,7 +1,6 @@
 import plat from "@/public/plat-vegetarien.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
 
 export default function Homepage() {
   return (
@@ -55,10 +54,12 @@ export default function Homepage() {
               qu&apos;à sauvegarder votre résultat pour le consulter plus tard
               et ainsi voir votre progression !
             </p>
-            <div className="grid grid-cols-2 place-items-center gap-5">
-              <Button>Créez un compte</Button>
-              <Button>Connexion</Button>
-            </div>
+            <Link
+              href="/auth"
+              className="p-4 bg-blue-300 hover:bg-blue-500 transition-colors duration-500 ease-in-out text-base lg:text-xl text-black hover:text-white rounded-lg text-center mx-auto"
+            >
+              Connexion
+            </Link>
           </div>
         </div>
       </section>
