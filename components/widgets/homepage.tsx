@@ -14,10 +14,18 @@ export default function Homepage() {
             </h1>
             <p className="text-sm">
               Cette application a pour but de vous forunir un aperçu de votre
-              IMC (indice de masse corporelle), si vous souhaitez démarrer un
-              rééquilibrage alimentaire ou la pratique d&apos;un sport,
-              consultez un professionnel de santé.
+              IMC (indice de masse corporelle).
             </p>
+            <p className="text-red-500 font-bold">
+              Si vous souhaitez démarrer un rééquilibrage alimentaire ou la
+              pratique d&apos;un sport, consultez un professionnel de santé.
+            </p>
+            <Link
+              href="/calcul"
+              className="bg-blue-300 hover:bg-blue-500 transition-colors duration-500 ease-in-out text-base lg:text-xl text-black hover:text-white py-2 px-4 rounded-lg w-3/5 text-center mx-auto"
+            >
+              Calculez
+            </Link>
           </div>
           <Image
             src={plat}
@@ -27,12 +35,6 @@ export default function Homepage() {
             className="border rounded-lg shadow-xl border-black"
           />
         </div>
-        <Link
-          href="/calcul"
-          className="bg-blue-300 hover:bg-blue-500 transition-colors duration-500 ease-in-out text-base lg:text-xl text-black hover:text-white py-2 px-4 rounded-lg"
-        >
-          Calculez votre IMC
-        </Link>
       </header>
       <section className="w-4/5 grid grid-cols-1 place-items-center gap-20 my-20 md:grid-cols-2">
         <Image
@@ -43,21 +45,14 @@ export default function Homepage() {
           className="border rounded-lg shadow-xl border-black"
         />
         <div className="grid grid-cols-1 place-items-center gap-10">
-          <h2 className="text-xl font-bold">Ce que vous pouvez faire.</h2>
+          <h2 className="text-xl font-bold">Comment ça fonctionne ?</h2>
           <div className="grid grid-cols-1 place-items-center gap-10 text-sm">
             <p>
-              Cette application a pour but de vous donner un aperçu de votre
-              rapport poids / taille.
-            </p>
-            <p className="hidden">
-              Vous pouvez vous inscrire ou vous connecter à votre compte afin de
-              planifier des objectifs clairs sur l&apos;IMC que vous souhaitez
-              atteindre, vous pourrez également visionner votre progression
-              grâce à un graphique.{" "}
-            </p>
-            <p>
-              Avant de démarrer un rééquilibrage alimentaire ou la pratique
-              d&apos;un sport, consultez un professionnel de santé.
+              Il vous suffira d&apos;entrer, votre poids, votre taille ainsi que
+              la date à laquelle vous faites ce calcul et hop !
+              L&apos;application se charge de tout ! Il ne vous restera plus
+              qu&apos;à sauvegarder votre résultat pour le consulter plus tard
+              et ainsi voir votre progression !
             </p>
             <div className="grid grid-cols-2 place-items-center gap-5">
               <Button>Créez un compte</Button>
