@@ -22,7 +22,7 @@ export default function CardInfos() {
   } = useImc();
 
   return (
-    <div className="my-20 w-full flex flex-col items-center gap-20">
+    <div className="my-20 w-full flex flex-col items-center gap-20 min-h-dvh">
       <h1 className="w-4/5 text-center">
         Entrez votre taille et votre poids pour connaître votre Indice de Masse
         Corporelle
