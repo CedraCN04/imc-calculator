@@ -20,7 +20,7 @@
     --secondary-foreground: 0 0% 9%;
 
     --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted-foreground: 0 0% 30%;
 
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
@@ -92,6 +92,39 @@
   .slideDown {
     animation: slideDown 500ms ease-in-out backwards;
     animation-delay: 200ms;
+  }
+
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0turn;
+    inherits: false;
+  }
+
+  .card {
+    animation: 2s gradient-angle infinite linear;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#c0e4fa, #a0bdfc),
+      conic-gradient(
+        from var(--gradient-angle),
+        #190482 0%,
+        #7752fe 37%,
+        #c2d9ff 30%,
+        #7752fe 33%,
+        #190482 40%,
+        #190482 50%,
+        #7752fe 77%,
+        #c2d9ff 80%,
+        #7752fe 83%,
+        #190482 90%
+      );
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+  }
+
+  @keyframes gradient-angle {
+    to {
+      --gradient-angle: 1turn;
+    }
   }
 }
 

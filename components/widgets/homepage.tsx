@@ -13,7 +13,7 @@ export default function Homepage() {
               Suivez la progression de votre indice de masse corporelle.
             </h1>
             <p className="text-sm">
-              Cette application a pour but de vous forunir un aperçu de votre
+              Cette application a pour but de vous fournir un aperçu de votre
               IMC (indice de masse corporelle).
             </p>
             <p className="text-red-500 font-bold">
@@ -36,7 +36,8 @@ export default function Homepage() {
           />
         </div>
       </header>
-      <section className="w-4/5 grid grid-cols-1 place-items-center gap-20 my-20 md:grid-cols-2">
+      <hr className="w-4/5 h-1 bg-slate-400 mt-20" />
+      <section className="w-4/5 grid grid-cols-1 place-items-center gap-20 mt-20 mb-40 md:grid-cols-2">
         <Image
           src={plat}
           alt="Un plat végétarien"

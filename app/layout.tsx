@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} bg-gradient-to-br from-sky-100 to-indigo-300`}
+      >
         <header className="w-full background shadow-lg">
           <NavBar />
         </header>
